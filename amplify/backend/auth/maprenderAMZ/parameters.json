@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "geoAppIndentityPoolALS",
+    "identityPoolName": "maprenderAMZIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "geoapp132efef3",
-    "userPoolName": "geoAppPoolALS",
+    "resourceNameTruncated": "mapren381b9fa9",
+    "userPoolName": "maprenderAMZUserPool",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,20 +20,24 @@
     "requiredAttributes": [
         "email",
         "family_name",
-        "gender"
+        "given_name"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email"
+        "email",
+        "family_name",
+        "given_name"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+        "email",
+        "family_name",
+        "given_name"
     ],
-    "userpoolClientLambdaRole": "geoApp132efef3_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
-    "sharedId": "132efef3",
-    "resourceName": "geoAppAuthALS",
+    "userpoolClientLambdaRole": "mapren381b9fa9_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": true,
+    "sharedId": "381b9fa9",
+    "resourceName": "maprenderAMZ",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

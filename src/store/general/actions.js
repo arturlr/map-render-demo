@@ -93,7 +93,7 @@ export async function saveUser({ commit },
 }
 
 export async function saveDevice({ commit },
-    { id, userID, deviceOS, lastLocation, deviceGeoFenceId, isNewDevice }) {
+    { id, userID, deviceType, isNewDevice }) {
     try {
         console.group("store/general/actions/saveDevice");
         commit("SET_LOADER", true);
@@ -101,9 +101,7 @@ export async function saveDevice({ commit },
         var deviceInput = {
             id: id,
             userID: userID,
-            deviceOS: deviceOS,
-            lastLocation: lastLocation,
-            deviceGeofenceId: deviceGeoFenceId
+            deviceType: deviceType,
         }
         if (!isNewDevice) {
             const {

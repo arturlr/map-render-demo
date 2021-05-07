@@ -1,6 +1,6 @@
 {
   "auth": {
-    "geoAppAuthALS": {
+    "maprenderAMZ": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,7 +8,7 @@
     }
   },
   "api": {
-    "geoappals": {
+    "maprenderAMZAPI": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -16,7 +16,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authgeoAppAuthALS"
+              "userPoolId": "authmaprenderAMZ"
             }
           },
           "additionalAuthenticationProviders": [

@@ -17,11 +17,5 @@ type Device @model
 ]){
   id: ID!
   userID: ID
-  deviceOS: String
-  lastLocation: [Coordinate]
-}
-type Coordinate
-@aws_iam @aws_cognito_user_pools {
-  lat: Float!
-  lng: Float!
+  deviceType: String
 }

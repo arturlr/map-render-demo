@@ -7,31 +7,15 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        firstName
-        lastName
-        email
+        fullName
         createdAt
         updatedAt
         owner
         device {
           id
           userID
-          deviceOS
+          deviceType
           updatedAt
-          lastLocation {
-            lat
-            lng
-          }
-          createdAt
-          updatedAt
-          owner
-          geofence {
-            id
-            geoFenceName
-            createdAt
-            updatedAt
-            owner
-          }
         }
       }
       nextToken

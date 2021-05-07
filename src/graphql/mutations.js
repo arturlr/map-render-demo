@@ -15,11 +15,7 @@ export const createUser = /* GraphQL */ `
       device {
         id
         userID
-        deviceOS
-        lastLocation {
-          lat
-          lng
-        }
+        deviceType
         createdAt
         updatedAt
         owner
@@ -41,11 +37,7 @@ export const updateUser = /* GraphQL */ `
       device {
         id
         userID
-        deviceOS
-        lastLocation {
-          lat
-          lng
-        }
+        deviceType
         createdAt
         updatedAt
         owner
@@ -67,11 +59,7 @@ export const deleteUser = /* GraphQL */ `
       device {
         id
         userID
-        deviceOS
-        lastLocation {
-          lat
-          lng
-        }
+        deviceType
         createdAt
         updatedAt
         owner
@@ -87,11 +75,7 @@ export const createDevice = /* GraphQL */ `
     createDevice(input: $input, condition: $condition) {
       id
       userID
-      deviceOS
-      lastLocation {
-        lat
-        lng
-      }
+      deviceType
       createdAt
       updatedAt
       owner
@@ -106,11 +90,7 @@ export const updateDevice = /* GraphQL */ `
     updateDevice(input: $input, condition: $condition) {
       id
       userID
-      deviceOS
-      lastLocation {
-        lat
-        lng
-      }
+      deviceType
       createdAt
       updatedAt
       owner
@@ -125,11 +105,7 @@ export const deleteDevice = /* GraphQL */ `
     deleteDevice(input: $input, condition: $condition) {
       id
       userID
-      deviceOS
-      lastLocation {
-        lat
-        lng
-      }
+      deviceType
       createdAt
       updatedAt
       owner

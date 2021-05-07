@@ -12,11 +12,7 @@ export const getUser = /* GraphQL */ `
       device {
         id
         userID
-        deviceOS
-        lastLocation {
-          lat
-          lng
-        }
+        deviceType
         createdAt
         updatedAt
         owner
@@ -40,7 +36,7 @@ export const listUsers = /* GraphQL */ `
         device {
           id
           userID
-          deviceOS
+          deviceType
           createdAt
           updatedAt
           owner
@@ -60,11 +56,7 @@ export const listDevices = /* GraphQL */ `
       items {
         id
         userID
-        deviceOS
-        lastLocation {
-          lat
-          lng
-        }
+        deviceType
         createdAt
         updatedAt
         owner
@@ -78,11 +70,7 @@ export const getDevice = /* GraphQL */ `
     getDevice(id: $id) {
       id
       userID
-      deviceOS
-      lastLocation {
-        lat
-        lng
-      }
+      deviceType
       createdAt
       updatedAt
       owner

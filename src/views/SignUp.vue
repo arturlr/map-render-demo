@@ -1,7 +1,7 @@
 <template>
     <div class="column  justify-center items-center q-pa-lg">
       <q-card v-if="formState === 'signUp'" square class="shadow-24">
-        <q-card-section class="bg-teal">
+        <q-card-section class="primary">
           <div class="text-h6">New User Creation</div>
         </q-card-section>
         <q-card-section>
@@ -47,7 +47,7 @@
           </q-form>
         </q-card-section>
         <q-card-actions class="q-px-lg">
-          <q-btn unelevated size="lg" @click="signUp" class="bg-teal full-width text-white" label="Create" />
+          <q-btn unelevated size="lg" @click="signUp" class="primary full-width text-white" label="Create" />
         </q-card-actions>
         <q-card-section class="text-center q-pa-sm">
           <q-btn flat size="sm" @click="toggleLogin" color="black" label="Already a User? Click here!" />
@@ -73,7 +73,7 @@
           </q-form>
         </q-card-section>
         <q-card-actions class="q-px-lg">
-          <q-btn unelevated size="lg" @click="confirmSignUp" class="bg-teal full-width text-white" label="Submit" />
+          <q-btn unelevated size="lg" @click="confirmSignUp" class="primary full-width text-white" label="Submit" />
         </q-card-actions>     
         <q-card-section class="text-center q-pa-sm">
           <q-btn flat size="sm" @click="resendSignUp" color="black" label="Send another code" />
@@ -115,7 +115,7 @@ export default {
       this.$q.notify({
           color: "teal",
           icon: "thumb_up",
-          message: "Usuario criado!! ",
+          message: "User Successfully created!! ",
           position: "right"
       });
       this.$router.push("/auth");
