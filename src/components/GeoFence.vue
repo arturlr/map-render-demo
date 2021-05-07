@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import mapboxgl from "mapbox-gl";
-import MapboxDraw from "@mapbox/mapbox-gl-draw/index";
+import maplibre from "maplibre-gl";
+// import MapboxDraw from "@mapbox/mapbox-gl-draw/index";
 import { Auth } from "aws-amplify";
 import aws_exports from "../aws-exports";
 import { Signer } from "@aws-amplify/core";
@@ -76,7 +76,7 @@ export default {
       var lat = 0;
       var lng = 0;
 
-      this.map = new mapboxgl.Map({
+      this.map = new maplibre.Map({
         container: "map",
         //Specify the centre of the map when it gets rendered
         center: [lat, lng],
@@ -85,10 +85,10 @@ export default {
         transformRequest: this.transformRequest,
       });
       //Zoom in and out button
-      this.map.addControl(new mapboxgl.NavigationControl(), "top-left");
+      this.map.addControl(new maplibre.NavigationControl(), "top-left");
       //A button that allows the map to fly to user’s current location when pressed
       this.map.addControl(
-        new mapboxgl.GeolocateControl({
+        new maplibre.GeolocateControl({
           positionOptions: {
             enableHighAccuracy: true,
           },
@@ -98,13 +98,13 @@ export default {
     },
 
     enablePolygon() {
-      this.draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {
-          polygon: true,
-          trash: true,
-        },
-      });
+      // this.draw = new MapboxDraw({
+      //   displayControlsDefault: false,
+      //   controls: {
+      //     polygon: true,
+      //     trash: true,
+      //   },
+      // });
       this.map.addControl(this.draw);
 
       this.map.on("draw.create", this.updateArea);

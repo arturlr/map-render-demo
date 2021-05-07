@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import mapboxgl from "mapbox-gl";
+import maplibre from "maplibre-gl";
 import { Auth } from "aws-amplify";
 import awsconfig from '../aws-exports'
 import { Signer } from "@aws-amplify/core";
@@ -43,8 +43,8 @@ export default {
     },
 
     async initMap() {
-      var LngLat = new mapboxgl.LngLat(this.row.lastLocation.lng, this.row.lastLocation.lat);
-      let map = new mapboxgl.Map({
+      var LngLat = new maplibre.LngLat(this.row.lastLocation.lng, this.row.lastLocation.lat);
+      let map = new maplibre.Map({
             container: "markmap",
            //Specify the centre of the map when it gets rendered
             center: LngLat, 
@@ -53,10 +53,10 @@ export default {
             transformRequest: this.transformRequest
         });
         //Zoom in and out button
-        map.addControl(new mapboxgl.NavigationControl(), "top-left"); 
+        map.addControl(new maplibre.NavigationControl(), "top-left"); 
         //A button that allows the map to fly to user’s current location when pressed
         map.addControl(
-            new mapboxgl.GeolocateControl({
+            new maplibre.GeolocateControl({
                 positionOptions: {
                     enableHighAccuracy: true
                 },
@@ -64,7 +64,7 @@ export default {
             })
         );
         //Backend of marker and draw tool can be done later when we add geocoding and drawing function!
-        const marker = new mapboxgl.Marker()
+        const marker = new maplibre.Marker()
           .setLngLat(LngLat)
           .addTo(map);
         console.log(marker);
