@@ -5,9 +5,7 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
-      firstName
-      lastName
-      email
+      fullName
       createdAt
       updatedAt
       owner
@@ -22,13 +20,6 @@ export const getUser = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        geofence {
-          id
-          geoFenceName
-          createdAt
-          updatedAt
-          owner
-        }
       }
     }
   }
@@ -42,9 +33,7 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        firstName
-        lastName
-        email
+        fullName
         createdAt
         updatedAt
         owner
@@ -79,13 +68,6 @@ export const listDevices = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        geofence {
-          id
-          geoFenceName
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
@@ -104,85 +86,6 @@ export const getDevice = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-      geofence {
-        id
-        geoFenceName
-        createdAt
-        updatedAt
-        owner
-      }
-    }
-  }
-`;
-export const listGeoFences = /* GraphQL */ `
-  query ListGeoFences(
-    $filter: ModelGeoFenceFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listGeoFences(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        geoFenceName
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getGeoFence = /* GraphQL */ `
-  query GetGeoFence($id: ID!) {
-    getGeoFence(id: $id) {
-      id
-      geoFenceName
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const getAlert = /* GraphQL */ `
-  query GetAlert($id: ID!) {
-    getAlert(id: $id) {
-      id
-      userID
-      type
-      description
-      location {
-        lat
-        lng
-      }
-      createdAt
-      expirationTime
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listAlerts = /* GraphQL */ `
-  query ListAlerts(
-    $filter: ModelAlertFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAlerts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userID
-        type
-        description
-        location {
-          lat
-          lng
-        }
-        createdAt
-        expirationTime
-        updatedAt
-        owner
-      }
-      nextToken
     }
   }
 `;

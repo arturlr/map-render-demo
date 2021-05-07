@@ -17,7 +17,7 @@ type Device @model
 ]){
   id: ID!
   userID: ID
-  deviceType: String
+  deviceOS: String
   lastLocation: [Coordinate]
 }
 type Coordinate

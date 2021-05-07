@@ -1,6 +1,6 @@
 {
   "auth": {
-    "awslocationservicesv1": {
+    "geoAppAuthALS": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,7 +8,7 @@
     }
   },
   "api": {
-    "awslocationservicesv1": {
+    "geoappals": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -16,7 +16,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authawslocationservicesv1"
+              "userPoolId": "authgeoAppAuthALS"
             }
           },
           "additionalAuthenticationProviders": [

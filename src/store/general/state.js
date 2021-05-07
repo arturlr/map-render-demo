@@ -8,5 +8,4 @@ export default {
     paginationToken: "",
     userRec: "",
     deviceRec: "",
-    geoFenceRec: null,
   };

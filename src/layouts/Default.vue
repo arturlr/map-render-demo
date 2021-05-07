@@ -3,7 +3,7 @@
     <q-toolbar class="bg-primary text-white q-my-md shadow-2">
       <q-btn flat round dense icon="menu" class="q-mr-sm" to="/" />
       <q-separator dark vertical inset />
-      <q-btn flat label="GeoCare" />
+      <q-btn flat label="GeoApp" />
       <q-separator dark vertical />
       <q-btn flat
         icon="person"
@@ -61,17 +61,7 @@ export default {
         { icon: "house", 
           page: "/", 
           label: "Home" 
-        },
-        {
-          icon: "smartphone",
-          page: "devices",
-          label: "Users/Devices"
-        },
-        {
-          icon: "room",
-          page: "location",
-          label: "location"
-        },
+        }
       ],
     };
   },

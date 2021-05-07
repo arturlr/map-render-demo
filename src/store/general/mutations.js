@@ -10,10 +10,6 @@
     state.deviceRec = device;
   };
 
-  export const SET_GEOFENCE = (state, geofence) => {
-    state.geoFenceRec = geofence;
-  };
-
   export const SET_LOCATION_LIST = (state, location) => {
     state.locationList = location;
   };
@@ -28,10 +24,6 @@
 
   export const SET_PLACE = (state, place) => {
     state.place = place;
-  };
-
-  export const SET_VERTICES = (state, vertices) => {
-    state.vertices = vertices;
   };
   
   export const SET_PAGINATION = (state, paginationToken) => {

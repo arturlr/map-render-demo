@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "awslocationservicesv1_identitypool",
+    "identityPoolName": "geoAppIndentityPoolALS",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "awslocaffa062c",
-    "userPoolName": "awslocationservicesv1_userpool",
+    "resourceNameTruncated": "geoapp132efef3",
+    "userPoolName": "geoAppPoolALS",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,24 +20,20 @@
     "requiredAttributes": [
         "email",
         "family_name",
-        "given_name"
+        "gender"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email",
-        "family_name",
-        "given_name"
+        "email"
     ],
     "userpoolClientReadAttributes": [
-        "email",
-        "family_name",
-        "given_name"
+        "email"
     ],
-    "userpoolClientLambdaRole": "awslocaffa062c_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": true,
-    "sharedId": "affa062c",
-    "resourceName": "awslocationservicesv1",
+    "userpoolClientLambdaRole": "geoApp132efef3_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "132efef3",
+    "resourceName": "geoAppAuthALS",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

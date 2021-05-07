@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-awslocationservices-dev-183118-authRole",
-      "UnauthRoleArn": "arn:aws:iam::158322217134:role/amplify-awslocationservices-dev-183118-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::158322217134:role/amplify-awslocationservices-dev-183118-authRole",
+      "AuthRoleName": "amplify-geoappals-dev-232124-authRole",
+      "UnauthRoleArn": "arn:aws:iam::158322217134:role/amplify-geoappals-dev-232124-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::158322217134:role/amplify-geoappals-dev-232124-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-awslocationservices-dev-183118-deployment",
-      "UnauthRoleName": "amplify-awslocationservices-dev-183118-unauthRole",
-      "StackName": "amplify-awslocationservices-dev-183118",
-      "StackId": "arn:aws:cloudformation:us-west-2:158322217134:stack/amplify-awslocationservices-dev-183118/45c8cd60-a6f8-11eb-8860-06150ea29d37",
-      "AmplifyAppId": "dvbkdsqaib17c"
+      "DeploymentBucketName": "amplify-geoappals-dev-232124-deployment",
+      "UnauthRoleName": "amplify-geoappals-dev-232124-unauthRole",
+      "StackName": "amplify-geoappals-dev-232124",
+      "StackId": "arn:aws:cloudformation:us-west-2:158322217134:stack/amplify-geoappals-dev-232124/74a564c0-aefc-11eb-83ba-02881debe6b9",
+      "AmplifyAppId": "d9s8t40bh3yeg"
     },
     "categories": {
       "auth": {
-        "awslocationservicesv1": {}
+        "geoAppAuthALS": {}
       }
     }
   }

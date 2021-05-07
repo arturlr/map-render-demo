@@ -8,9 +8,7 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
-      email
+      fullName
       createdAt
       updatedAt
       owner
@@ -25,13 +23,6 @@ export const createUser = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        geofence {
-          id
-          geoFenceName
-          createdAt
-          updatedAt
-          owner
-        }
       }
     }
   }
@@ -43,9 +34,7 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
-      email
+      fullName
       createdAt
       updatedAt
       owner
@@ -60,13 +49,6 @@ export const updateUser = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        geofence {
-          id
-          geoFenceName
-          createdAt
-          updatedAt
-          owner
-        }
       }
     }
   }
@@ -78,9 +60,7 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
-      email
+      fullName
       createdAt
       updatedAt
       owner
@@ -95,13 +75,6 @@ export const deleteUser = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        geofence {
-          id
-          geoFenceName
-          createdAt
-          updatedAt
-          owner
-        }
       }
     }
   }
@@ -122,13 +95,6 @@ export const createDevice = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-      geofence {
-        id
-        geoFenceName
-        createdAt
-        updatedAt
-        owner
-      }
     }
   }
 `;
@@ -148,13 +114,6 @@ export const updateDevice = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-      geofence {
-        id
-        geoFenceName
-        createdAt
-        updatedAt
-        owner
-      }
     }
   }
 `;
@@ -172,118 +131,6 @@ export const deleteDevice = /* GraphQL */ `
         lng
       }
       createdAt
-      updatedAt
-      owner
-      geofence {
-        id
-        geoFenceName
-        createdAt
-        updatedAt
-        owner
-      }
-    }
-  }
-`;
-export const createGeoFence = /* GraphQL */ `
-  mutation CreateGeoFence(
-    $input: CreateGeoFenceInput!
-    $condition: ModelGeoFenceConditionInput
-  ) {
-    createGeoFence(input: $input, condition: $condition) {
-      id
-      geoFenceName
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateGeoFence = /* GraphQL */ `
-  mutation UpdateGeoFence(
-    $input: UpdateGeoFenceInput!
-    $condition: ModelGeoFenceConditionInput
-  ) {
-    updateGeoFence(input: $input, condition: $condition) {
-      id
-      geoFenceName
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteGeoFence = /* GraphQL */ `
-  mutation DeleteGeoFence(
-    $input: DeleteGeoFenceInput!
-    $condition: ModelGeoFenceConditionInput
-  ) {
-    deleteGeoFence(input: $input, condition: $condition) {
-      id
-      geoFenceName
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createAlert = /* GraphQL */ `
-  mutation CreateAlert(
-    $input: CreateAlertInput!
-    $condition: ModelAlertConditionInput
-  ) {
-    createAlert(input: $input, condition: $condition) {
-      id
-      userID
-      type
-      description
-      location {
-        lat
-        lng
-      }
-      createdAt
-      expirationTime
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateAlert = /* GraphQL */ `
-  mutation UpdateAlert(
-    $input: UpdateAlertInput!
-    $condition: ModelAlertConditionInput
-  ) {
-    updateAlert(input: $input, condition: $condition) {
-      id
-      userID
-      type
-      description
-      location {
-        lat
-        lng
-      }
-      createdAt
-      expirationTime
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteAlert = /* GraphQL */ `
-  mutation DeleteAlert(
-    $input: DeleteAlertInput!
-    $condition: ModelAlertConditionInput
-  ) {
-    deleteAlert(input: $input, condition: $condition) {
-      id
-      userID
-      type
-      description
-      location {
-        lat
-        lng
-      }
-      createdAt
-      expirationTime
       updatedAt
       owner
     }

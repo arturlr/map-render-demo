@@ -22,19 +22,7 @@ const router = new VueRouter({
           name: "home",
           component: Home,
           meta: { requiresAuth: true, name: 'Home' }
-        },
-        {
-          path: '/location',
-          name: 'location',
-          component: () => import(/* webpackChunkName: "about" */ '../views/Location.vue'),
-          meta: { requiresAuth: true, name: 'Location' }
-        },
-        {
-          path: '/devices',
-          name: 'devices',
-          component: () => import(/* webpackChunkName: "about" */ '../views/Devices.vue'),
-          meta: { requiresAuth: true, name: 'Devices' }
-        }       
+        }      
       ]
     },
     {
