@@ -68,7 +68,7 @@
           <q-input
             label="Device Type"
             hint="Vendor and Model"
-            v-model="deviceOS"
+            v-model="deviceType"
             autofocus
             @keyup.enter="prompt = false"
           />
@@ -97,13 +97,13 @@ import { Auth } from "aws-amplify";
 import Map from '../components/Map'
 
 export default {
-  name: "UserDevices",
+  name: "Home",
   components: {
     Map
   },
   data() {
     return {
-      visibleColumns: [ 'fullname', 'email', 'deviceOS', 'deviceId', 'action', 'mapPosition' ],
+      visibleColumns: [ 'fullname', 'email', 'deviceType', 'deviceId', 'action', 'mapPosition' ],
       selected: [],
       b_addrow: false,
       b_removerow: false,
@@ -115,7 +115,7 @@ export default {
       email: "",
       location: "",
       isNewDevice: true,
-      deviceOS: "",
+      deviceType: "",
       deviceId: "",
       deviceUpdatedAt: "",
       columns: [
@@ -127,9 +127,9 @@ export default {
           sortable: true,
         },
         {
-          name: "deviceOS",
-          label: "deviceOS",
-          field: "deviceOS",
+          name: "deviceType",
+          label: "deviceType",
+          field: "deviceType",
           sortable: true,
         },
         {
@@ -139,14 +139,9 @@ export default {
           sortable: true,
         },        
         { name: 'mapPosition', 
-          label: 'LastPosition', 
+          label: 'LastPositions', 
           field: '', 
           align:'center' 
-        },
-        {
-          name: "lastLocation",
-          label: "lastLocation",
-          field: "lastLocation",
         },
         {
           name: "deviceUpdatedAt",
@@ -184,21 +179,9 @@ export default {
     },
 
     toggleShowMap(param) {
-      if (param.row.lastLocation == null) {
-        this.tabledata = null;
-        this.$q.notify({
-          color: "negative",
-          position: "top",
-          timeout: 5000,
-          icon: "warning",
-          message: "The user " + param.row.fullName + " does not have any last position to show.",
-        });
-      }
-      else {
         this.deviceUpdatedAt = param.row.deviceUpdatedAt;
         this.tabledata = param.row;
-        this.b_map = !this.b_map;
-      }                  
+        this.b_map = !this.b_map;                   
     },
 
     resetVariables() {
@@ -218,7 +201,7 @@ export default {
               fullName: this.userDeviceList[i].fullName,
               deviceId: this.userDeviceList[i].device.id,
               lastLocation: this.userDeviceList[i].device.lastLocation,        
-              deviceOS: this.userDeviceList[i].device.deviceOS,
+              deviceType: this.userDeviceList[i].device.deviceType,
               deviceUpdatedAt: this.userDeviceList[i].device.updatedAt,
             })
           }        
@@ -248,7 +231,7 @@ export default {
         await this.$store.dispatch("general/saveDevice", {
           isNewDevice: this.isNewDevice,
           id: this.deviceId,
-          deviceOS: this.deviceOS,
+          deviceType: this.deviceType,
           userID: this.userRec.id,
           deviceGeoFenceId: this.location //from select
         });

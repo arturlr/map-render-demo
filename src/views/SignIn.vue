@@ -2,7 +2,7 @@
   <div class="column justify-center items-center q-pa-lg">
     <!-- <q-card square class="shadow-24" style="width:300px;height:485px;"> -->
     <q-card square class="shadow-24">
-      <q-card-section class="primary">
+      <q-card-section class="bg-primary">
         <h4 class="text-h6 text-white q-my-sm">Login</h4>
       </q-card-section>
       <q-card-section>
@@ -44,7 +44,7 @@
           unelevated
           size="lg"
           @click="onSubmit"
-          class="primary full-width text-white"
+          class="bg-primary full-width text-white"
           label="Log In"
         />
       </q-card-actions>

@@ -19,9 +19,8 @@ const router = new VueRouter({
       children: [
         {
           path: "/",
-          name: "home",
           component: Home,
-          meta: { requiresAuth: true, name: 'Home' }
+          meta: { requiresAuth: true }
         }      
       ]
     },

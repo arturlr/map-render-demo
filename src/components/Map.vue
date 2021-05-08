@@ -9,18 +9,28 @@ import maplibre from "maplibre-gl";
 import { Auth } from "aws-amplify";
 import awsconfig from '../aws-exports'
 import { Signer } from "@aws-amplify/core";
+import location from "aws-sdk/clients/location";
 
 export default {
   name: "Map",
   props: ['row'],
   data() {
     return {
-      credentials: null
+      credentials: null,
+      service: null,
+      positions: [],
+      center: null,
+      zoom: null
     };
   },  
   async mounted() {        
-    this.credentials = await Auth.currentCredentials(); 
-    this.initMap();    
+    this.credentials = await Auth.currentCredentials();
+    this.service = new location({
+        credentials: this.credentials,
+        region: awsconfig.aws_project_region,
+    });
+    this.positions = await this.getPositions();
+    this.initMap();
   },
   methods: {
     transformRequest(url,resourceType){  
@@ -42,13 +52,48 @@ export default {
         return { url: url || "" };
     },
 
+    getPositions() {
+      var vm = this
+      return new Promise(function (resolve, reject) {
+        const msSinceEpoch = (new Date()).getTime();
+        const now15minbefore = new Date(msSinceEpoch - (15 * 60 * 1000));
+
+        var params = {
+          DeviceId: vm.row.deviceId,
+          TrackerName: process.env.VUE_APP_TRACKER_NAME,
+          EndTimeExclusive: new Date(),
+          StartTimeInclusive: now15minbefore
+        };
+
+        vm.service.getDevicePositionHistory(params, function(err, data) {
+          if (err) { 
+            console.log(err, err.stack);
+            reject(err);
+          }
+          else { 
+            console.log(data);
+            resolve(data.DevicePositions);
+          }        
+        });
+      })
+    },
+
     async initMap() {
-      var LngLat = new maplibre.LngLat(this.row.lastLocation.lng, this.row.lastLocation.lat);
+
+      if (this.positions && this.positions.length != 0) {
+        this.center = new maplibre.LngLat(this.positions[0].Position[0], this.positions[0].Position[1])
+        this.zoom = 12               
+      }
+      else {
+        this.center = new maplibre.LngLat(0,0)
+        this.zoom = 2
+      }
+  
       let map = new maplibre.Map({
             container: "markmap",
            //Specify the centre of the map when it gets rendered
-            center: LngLat, 
-            zoom: 15, //Adjust the zoom level
+            center: this.center, 
+            zoom: this.zoom, //Adjust the zoom level
             style: process.env.VUE_APP_MAP_NAME,
             transformRequest: this.transformRequest
         });
@@ -63,11 +108,14 @@ export default {
                 trackUserLocation: true,
             })
         );
-        //Backend of marker and draw tool can be done later when we add geocoding and drawing function!
-        const marker = new maplibre.Marker()
-          .setLngLat(LngLat)
-          .addTo(map);
-        console.log(marker);
+        if (this.positions) {
+          for (let i = 0; i < this.positions.length; i++) {
+              new maplibre.Marker()
+                .setLngLat(this.positions[i].Position)
+                .setPopup(new maplibre.Popup().setHTML(this.positions[i].ReceivedTime)) // add popup
+                .addTo(map);
+          }
+        }
     },
   },
 };
