@@ -5,8 +5,8 @@
       title="User/Devices"
       :data="data"
       :columns="columns"
-      row-key="id"
-      selection="single"
+      row-key="userId"
+      selection="multiple"
       :selected.sync="selected"
     >
     
@@ -40,7 +40,7 @@
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
-          <div class="text-subtitle2">Updated at: {{ deviceUpdatedAt }}</div>
+          <div class="text-subtitle2">Resident: {{ fullName }}</div>
         </q-card-section>
         <q-card-section>
           <Map :row="tabledata"/>
@@ -89,6 +89,21 @@
       </q-card>
     </q-dialog>
 
+
+    <q-dialog v-model="b_removerow" persistent>
+      <q-card>
+        <q-card-section class="row items-center">
+          <q-icon name="error_outline" size="xl" color="warning" />
+          <span class="q-ml-sm">Delete {{ selected.length }} users?</span>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="No" color="black" v-close-popup />
+          <q-btn flat label="Yes" color="black" v-close-popup @click="removeRow"/>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
   </div>
 </template>
 <script>
@@ -119,6 +134,11 @@ export default {
       deviceId: "",
       deviceUpdatedAt: "",
       columns: [
+        {
+          name: "userId",
+          label: "userId",
+          field: "userId"
+        },
         {
           name: "fullname",
           align: "left",
@@ -175,11 +195,11 @@ export default {
       this.b_addrow = !this.b_addrow;
     },
     toggleRemoveRow() {
-      this.b_addrow = !this.b_addrow;
+      this.b_removerow = !this.b_removerow;
     },
 
     toggleShowMap(param) {
-        this.deviceUpdatedAt = param.row.deviceUpdatedAt;
+        this.fullName = param.row.fullName;
         this.tabledata = param.row;
         this.b_map = !this.b_map;                   
     },
@@ -198,9 +218,9 @@ export default {
         if (this.userDeviceList && this.userDeviceList.length > 0) {          
           for (let i=0; i < this.userDeviceList.length; i++) { 
             this.data.push({
+              userId: this.userDeviceList[i].id,
               fullName: this.userDeviceList[i].fullName,
-              deviceId: this.userDeviceList[i].device.id,
-              lastLocation: this.userDeviceList[i].device.lastLocation,        
+              deviceId: this.userDeviceList[i].device.id,     
               deviceType: this.userDeviceList[i].device.deviceType,
               deviceUpdatedAt: this.userDeviceList[i].device.updatedAt,
             })
@@ -252,14 +272,33 @@ export default {
       }
     },
 
-    removeRow() {
-      // this.loading = true
-      // setTimeout(() => {
-      //   const index = Math.floor(Math.random() * this.data.length)
-      //   this.data = [ ...this.data.slice(0, index), ...this.data.slice(index + 1) ]
-      //   this.loading = false
-      // }, 500)
-    },
+    async removeRow() {
+      try {
+        for (let i = 0; i < this.selected.length; i++) { 
+          await this.$store.dispatch("general/delUser", {
+            id: this.selected[i].userId
+          });
+          console.log("User Deleted ");        
+
+          await this.$store.dispatch("general/delDevice", {
+            id: this.selected[i].deviceId,
+          });
+        }
+
+        this.loadTable();
+        
+        console.log("Device Deleted");
+      } catch (error) {
+        console.error(error);
+        this.$q.notify({
+          color: "negative",
+          position: "top",
+          timeout: 5000,
+          icon: "warning",
+          message: "Error: " + error,
+        });
+      }
+    }
   },
 };
 

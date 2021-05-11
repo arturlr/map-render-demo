@@ -1,26 +1,12 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { createUser, updateUser, createDevice, updateDevice } from "../../graphql/mutations";
-import { listUsers } from "./graphql";
-
-export function setPlace(
-    { commit }, { place }) {
-    console.group("store/general/actions/setPlace");
-    commit("SET_PLACE", place);
-    console.groupEnd();
-}
-
-export function setVertices(
-    { commit }, { vertices }) {
-    console.group("store/general/actions/setVertices");
-    commit("SET_VERTICES", vertices);
-    console.groupEnd();
-}
+import { createUser, updateUser, deleteUser, createDevice, updateDevice, deleteDevice } from "../../graphql/mutations";
+import { listUsers } from "../../graphql/queries";
 
 export async function fetchUsers(
     { commit }) {
     try {
         let usersList = null;
-        console.group("store/general/actions/listUsers");
+        console.group("store/general/actions/fetchUsers");
         commit("SET_LOADER", true);
         commit("SET_DATA", []);
 
@@ -30,9 +16,7 @@ export async function fetchUsers(
         } = await API.graphql(graphqlOperation(listUsers));
 
         usersList = results
-        console.log(usersList)
-
-        //console.log(usersList);
+        //console.log(usersList)        
         commit("SET_DATA", usersList);
         commit("SET_LOADER", false);
         console.groupEnd();
@@ -43,7 +27,6 @@ export async function fetchUsers(
         throw error;
     }
 }
-
 
 export async function saveUser({ commit },
     { id, fullName, userDeviceId }) {
@@ -124,6 +107,61 @@ export async function saveDevice({ commit },
         console.groupEnd();
         //console.log(result);
         return result;
+    } catch (error) {
+        console.error(error);
+        commit("SET_LOADER", false);
+        console.groupEnd();
+        throw error;
+    }
+}
+
+export async function delUser({ commit },
+    { id }) {
+    try {
+        console.group("store/general/actions/delUser");
+        commit("SET_LOADER", true);
+
+        var delInput = {
+            id: id
+        }
+        const {
+            // @ts-ignore
+            data: { deleteUser: result }
+        } = await API.graphql(graphqlOperation(deleteUser, {
+            input: delInput
+        }));
+
+        commit("SET_LOADER", false);
+        console.log(result.id);
+        console.groupEnd();        
+    } catch (error) {
+        console.error(error);
+        commit("SET_LOADER", false);
+        console.groupEnd();
+        throw error;
+    }
+}
+
+export async function delDevice({ commit },
+    { id }) {
+    try {
+        console.group("store/general/actions/delDevice");
+        commit("SET_LOADER", true);
+
+        var delInput = {
+            id: id
+        }
+        
+        const {
+            // @ts-ignore
+            data: { deleteDevice: result }
+        } = await API.graphql(graphqlOperation(deleteDevice, {
+            input: delInput
+        }));
+        
+        commit("SET_LOADER", false);
+        console.log(result.id);
+        console.groupEnd();        
     } catch (error) {
         console.error(error);
         commit("SET_LOADER", false);
