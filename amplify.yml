@@ -16,11 +16,12 @@ backend:
         - if [ -z "$VUE_APP_TRACKER_NAME" ]; then aws location create-tracker --tracker-name ${PROJECT_NAME}.tracker --pricing-plan "RequestBasedUsage"; fi
         - echo "VUE_APP_MAP_NAME=${PROJECT_NAME}.map" >> .env
         - echo "VUE_APP_TRACKER_NAME=${PROJECT_NAME}.tracker" >> .env
-        - echo $STACKINFO | jq -r '.AuthRoleName'
         - export S3AMPLIFY=$(aws resourcegroupstaggingapi get-resources --tag-filters Key=user:Application,Values="${PROJECT_NAME}" --resource-type-filters s3 --query 'ResourceTagMappingList[*].[ResourceARN]' --output text | grep -i deployment | cut -c14-)
         - export AMPLIFYROLENAME=${S3AMPLIFY/deployment/authRole}
-        - aws iam create-policy --policy-name ${PROJECT_NAME}-Location --policy-document file://location-policy.json
-        - aws iam attach-role-policy --role-name ${AMPLIFYROLENAME} --policy-arn arn:aws:iam::${AWSACCOUNTID}:policy/${PROJECT_NAME}-Location
+        - export LOCATION_POLICY=$(aws iam list-policies --query 'Policies[?PolicyName==`${PROJECT_NAME}`].PolicyName' --scope Local --output text)
+        - if [ -z "$LOCATION_POLICY" ]; then aws iam create-policy --policy-name ${PROJECT_NAME}-Location --policy-document file://location-policy.json; fi
+        - export LOCATION_ROLE_POLICY=$(aws iam list-attached-role-policies --role-name ${AMPLIFYROLENAME} --query 'AttachedPolicies[*].[PolicyName]' --output text | grep -i ${PROJECT_NAME}-Location)
+        - if [ -z "$LOCATION_ROLE_POLICY" ]; then aws iam attach-role-policy --role-name ${AMPLIFYROLENAME} --policy-arn arn:aws:iam::${AWSACCOUNTID}:policy/${PROJECT_NAME}-Location; fi              
 frontend:
   phases:
     preBuild:
