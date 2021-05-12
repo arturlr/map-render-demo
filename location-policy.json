@@ -26,10 +26,10 @@
                 "geo:GetMapTile"
             ],
             "Resource": [
-                "arn:aws:geo:::map/*",
-                "arn:aws:geo:::tracker/*",
-                "arn:aws:geo:::geofence-collection/*",
-                "arn:aws:geo:::place-index/*"
+                "arn:aws:geo:*:*:map/*",
+                "arn:aws:geo:*:*:tracker/*",
+                "arn:aws:geo:*:*:geofence-collection/*",
+                "arn:aws:geo:*:*:place-index/*"
             ]
         }
     ]
